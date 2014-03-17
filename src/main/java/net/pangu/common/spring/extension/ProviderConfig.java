@@ -7,7 +7,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import net.pangu.common.util.BeanHolder;
 import net.pangu.provider.transport.netty.NettyProviderrHandlerInitializer;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -15,11 +14,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 @SuppressWarnings("rawtypes")
 public class ProviderConfig<T> implements ApplicationListener {
     private T ref;
-    private transient ApplicationContext applicationContext;
-
-    public ApplicationContext getApplicationContext() {
-	return applicationContext;
-    }
 
     public T getRef() {
 	return ref;
@@ -39,6 +33,7 @@ public class ProviderConfig<T> implements ApplicationListener {
 	this.interfaceName = interfaceName;
     }
 
+    @Override
     public void onApplicationEvent(ApplicationEvent event) {
 	if (ContextRefreshedEvent.class.getName().equals(
 		event.getClass().getName())) {
@@ -70,24 +65,4 @@ public class ProviderConfig<T> implements ApplicationListener {
 	}
     }
 
-    // public void setBeanName(String name) {
-    // this.beanName = name;
-    //
-    // }
-    //
-    // public void setApplicationContext(ApplicationContext applicationContext)
-    // throws BeansException {
-    // this.applicationContext = applicationContext;
-    //
-    // }
-
-    // public void destroy() throws Exception {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
-    // public void afterPropertiesSet() throws Exception {
-    // // TODO Auto-generated method stub
-    //
-    // }
 }
