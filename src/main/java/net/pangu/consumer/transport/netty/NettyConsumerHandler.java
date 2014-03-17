@@ -18,7 +18,7 @@ public class NettyConsumerHandler extends ChannelHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg)
 	    throws Exception {
 	if (msg instanceof Response) {
-	    ResponseFuture.doSingalWhenReceivedServerResponse((Response) msg);
+	    FutureResponse.doSingalWhenReceivedServerResponse((Response) msg);
 	}
 
     }

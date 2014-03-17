@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 import net.pangu.common.util.BeanHolder;
 import net.pangu.consumer.Request;
-import net.pangu.consumer.transport.netty.ResponseFuture;
+import net.pangu.consumer.transport.netty.FutureResponse;
 import net.pangu.provider.Response;
 import net.pangu.provider.ServiceResponse;
 
@@ -23,8 +23,8 @@ public class NettyProviderHandler extends ChannelHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
 	    throws Exception {
-	if (msg instanceof ResponseFuture) {
-	    ResponseFuture future = (ResponseFuture) msg;
+	if (msg instanceof FutureResponse) {
+	    FutureResponse future = (FutureResponse) msg;
 	    Request request = future.getRequest();
 	    Object bean = BeanHolder.get(request.getInterfaceName());
 	    Class clazz = bean.getClass();

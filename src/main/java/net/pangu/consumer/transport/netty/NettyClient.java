@@ -32,7 +32,7 @@ public class NettyClient implements NetworkClient {
     }
 
     public Response sendRequestAndGetResponse(Request request) {
-	ResponseFuture responseFuture = new ResponseFuture(request);
+	FutureResponse responseFuture = new FutureResponse(request);
 
 	// FIXME
 	ChannelFuture future = channel.writeAndFlush(responseFuture);

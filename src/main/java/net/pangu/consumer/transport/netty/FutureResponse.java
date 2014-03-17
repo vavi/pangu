@@ -10,11 +10,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import net.pangu.consumer.Request;
 import net.pangu.provider.Response;
 
-public class ResponseFuture implements Serializable {
+public class FutureResponse implements Serializable {
 
     private static final long serialVersionUID = 8853860402670011858L;
 
-    private static final Map<Long, ResponseFuture> futures = new ConcurrentHashMap<Long, ResponseFuture>();
+    private static final Map<Long, FutureResponse> futures = new ConcurrentHashMap<Long, FutureResponse>();
 
     private final Lock lock = new ReentrantLock();
 
@@ -24,7 +24,7 @@ public class ResponseFuture implements Serializable {
 
     private final Request request;
 
-    public ResponseFuture(Request request) {
+    public FutureResponse(Request request) {
 	this.request = request;
 	futures.put(request.getId(), this);
     }
@@ -46,7 +46,7 @@ public class ResponseFuture implements Serializable {
     }
 
     public static void doSingalWhenReceivedServerResponse(Response response) {
-	ResponseFuture future = futures.remove(response.getId());
+	FutureResponse future = futures.remove(response.getId());
 	if (future != null) {
 	    future.assginResponseAndDoSignal(response);
 	}

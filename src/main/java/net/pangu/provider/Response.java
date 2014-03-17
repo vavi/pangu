@@ -3,9 +3,9 @@ package net.pangu.provider;
 import java.io.Serializable;
 
 public interface Response extends Serializable {
-    public long getId();
+    public Long getId();
 
-    public void setId(long id);
+    public void setId(Long id);
 
     public Object getResult();
 
